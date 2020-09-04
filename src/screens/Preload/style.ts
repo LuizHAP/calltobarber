@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    loading: {
+        margin: '10%',
+    }
 })
 
 export default styles;
