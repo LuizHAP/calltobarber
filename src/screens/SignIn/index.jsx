@@ -36,8 +36,8 @@ function SignIn() {
         });
 
         navigation.reset({
-          routes: [{name: 'MainTab'}]
-        })
+          routes: [{ name: "MainTab" }],
+        });
       } else {
         alert("E-mail e/ou senha errados!");
       }
