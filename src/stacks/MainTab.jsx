@@ -10,6 +10,8 @@ import Appointments from "../screens/Appointments";
 import Favorites from "../screens/Favorites";
 import Profile from "../screens/Profile";
 
+import styles from "./style";
+
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export default function MainTab() {
@@ -70,7 +72,7 @@ export default function MainTab() {
           tabBarIcon: ({ color, size, focused }) => {
             return (
               <Ionicons
-                name="ios-home"
+                name="ios-today"
                 size={size}
                 color={focused ? "#FFFFFF" : "#83D6E3"}
               />

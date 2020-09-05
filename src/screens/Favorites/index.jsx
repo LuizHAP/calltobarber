@@ -3,12 +3,12 @@ import { Text, View } from "react-native";
 
 import styles from "./style";
 
-function Appointments() {
+function Favorites() {
   return (
     <View >
-      <Text>Appointments</Text>
+      <Text>Favorites</Text>
     </View>
   );
 }
 
-export default Appointments;
+export default Favorites;

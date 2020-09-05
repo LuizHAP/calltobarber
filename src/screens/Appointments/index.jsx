@@ -3,12 +3,12 @@ import { Text, View } from "react-native";
 
 import styles from "./style";
 
-function Home() {
+function Appointments() {
   return (
     <View >
-      <Text>Home</Text>
+      <Text>Appointments</Text>
     </View>
   );
 }
 
-export default Home;
+export default Appointments;
