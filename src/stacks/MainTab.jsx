@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { View, Image } from "react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import { UserContext } from "../contexts/UserContext";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -15,6 +18,7 @@ import styles from "./style";
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export default function MainTab() {
+  const { state: user } = useContext(UserContext);
   return (
     <Navigator
       tabBarOptions={{
@@ -39,11 +43,11 @@ export default function MainTab() {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({ color, size, focused }) => {
+          tabBarIcon: ({ focused }) => {
             return (
               <Ionicons
                 name="ios-home"
-                size={size}
+                size={20}
                 color={focused ? "#FFFFFF" : "#83D6E3"}
               />
             );
@@ -54,11 +58,11 @@ export default function MainTab() {
         name="Search"
         component={Search}
         options={{
-          tabBarIcon: ({ color, size, focused }) => {
+          tabBarIcon: ({ focused }) => {
             return (
               <Ionicons
                 name="ios-search"
-                size={size}
+                size={20}
                 color={focused ? "#FFFFFF" : "#83D6E3"}
               />
             );
@@ -69,13 +73,23 @@ export default function MainTab() {
         name="Appointments"
         component={Appointments}
         options={{
-          tabBarIcon: ({ color, size, focused }) => {
+          tabBarIcon: () => {
             return (
-              <Ionicons
-                name="ios-today"
-                size={size}
-                color={focused ? "#FFFFFF" : "#83D6E3"}
-              />
+              <View
+                style={{
+                  marginTop: -40,
+                  height: 70,
+                  width: 70,
+                  borderRadius: 58,
+                  borderColor: "#4EADBE",
+                  borderWidth: 3,
+                  backgroundColor: "#FFF",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Ionicons name="ios-today" size={26} color={"#4EADBE"} />
+              </View>
             );
           },
         }}
@@ -84,11 +98,11 @@ export default function MainTab() {
         name="Favorites"
         component={Favorites}
         options={{
-          tabBarIcon: ({ color, size, focused }) => {
+          tabBarIcon: ({ focused }) => {
             return (
               <Ionicons
                 name="ios-heart"
-                size={size}
+                size={20}
                 color={focused ? "#FFFFFF" : "#83D6E3"}
               />
             );
@@ -99,13 +113,22 @@ export default function MainTab() {
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: ({ color, size, focused }) => {
+          tabBarIcon: ({ focused }) => {
             return (
-              <Ionicons
-                name="ios-person"
-                size={size}
-                color={focused ? "#FFFFFF" : "#83D6E3"}
-              />
+              <View>
+                {user.avatar != "" ? (
+                  <Image
+                    source={{ uri: user.avatar }}
+                    style={styles.imageIcon}
+                  />
+                ) : (
+                  <Ionicons
+                    name="ios-person"
+                    size={20}
+                    color={focused ? "#FFFFFF" : "#83D6E3"}
+                  />
+                )}
+              </View>
             );
           },
         }}

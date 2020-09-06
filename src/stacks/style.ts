@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-    tabCenter:{
-
+    imageIcon:{
+        width: 20,
+        height: 20,
+        borderRadius: 24,
     }
 })
 

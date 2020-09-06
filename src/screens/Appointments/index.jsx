@@ -5,7 +5,7 @@ import styles from "./style";
 
 function Appointments() {
   return (
-    <View >
+    <View style={styles.container}>
       <Text>Appointments</Text>
     </View>
   );
