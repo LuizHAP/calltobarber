@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#FFF',
     },
-    input:{
+    input: {
         color: '#FFF'
     },
     searchSection: {
@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#4EADBE',
     },
+    loading: {
+        margin: '10%',
+    }
 })
 
 export default styles;

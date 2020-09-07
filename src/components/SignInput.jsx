@@ -1,7 +1,7 @@
 import React from "react";
+import { TextInput, View } from "react-native";
 
 import styles from "./style";
-import { TextInput, View } from "react-native";
 
 const SignIn = ({ placeholder, value, onChangeText, password }) => {
   return (

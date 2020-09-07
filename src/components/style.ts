@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
         marginTop: 4,
         marginBottom: 16,
     },
+    listArea:{
+        marginVertical: 30,
+    },
 })
 
 export default styles;
