@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     searchSection: {
         flex: 1,
-        marginTop: 20,
+        marginVertical: 20,
         borderRadius: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',

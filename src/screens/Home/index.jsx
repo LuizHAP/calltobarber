@@ -5,6 +5,7 @@ import {
   ScrollView,
   TextInput,
   ActivityIndicator,
+  RefreshControl,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as Location from "expo-location";
@@ -24,11 +25,18 @@ function Home() {
   const [locationText, setLocationText] = useState("");
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [list, setList] = useState([]);
 
   useEffect(() => {
+    handleLocationFinder();
     getBarbers();
   }, []);
+
+  const onRefresh = () => {
+    setRefreshing(false);
+    getBarbers();
+  };
 
   const handleLocationFinder = async () => {
     setLoading(true);
@@ -44,6 +52,11 @@ function Home() {
     getBarbers();
   };
 
+  const handleLocationSearch = () => {
+    setLocation({});
+    getBarbers();
+  }
+
   const getBarbers = async () => {
     setList([]);
     let { status } = await Location.requestPermissionsAsync();
@@ -51,16 +64,20 @@ function Home() {
       setErrorMsg("Permission to access location was denied");
     }
 
-    let location = await Location.getCurrentPositionAsync({});
-    setLocation(location);
-    let res = await Api.getBarbers();
+    let lat = null;
+    let lng = null;
+
+    if (location) {
+      lat = location.coords.latitude;
+      lng = location.coords.longitude;
+    }
+
+    let res = await Api.getBarbers(lat, lng, locationText);
     if (res.error == "") {
       if (res.loc) {
         setLocationText(res.loc);
       }
       setList(res.data);
-    } else {
-      alert("Erro: " + res.error);
     }
 
     setLoading(false);
@@ -68,7 +85,12 @@ function Home() {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView
+        style={styles.scrollView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <View style={styles.headerArea}>
           <Text style={styles.headerText} numberOfLines={2}>
             Encontre o seu barbeiro favorito
@@ -88,6 +110,7 @@ function Home() {
             underlineColorAndroid="transparent"
             value={locationText}
             onChangeText={(t) => setLocationText(t)}
+            onEndEditing={handleLocationSearch}
           />
           <MyLocationIcon
             width="24"
@@ -99,9 +122,9 @@ function Home() {
         {loading && (
           <ActivityIndicator size="large" color="#FFF" style={styles.loading} />
         )}
-        {list.map((item, k) => {
-          <BarberItem key={k} data={item} />;
-        })}
+        {list.map((barber, k) => (
+          <BarberItem key={k} barber={barber} />
+        ))}
       </ScrollView>
     </View>
   );

@@ -1,18 +1,20 @@
 import React from "react";
-import { View, Image, Text, Button } from "react-native";
+import { View, Image, Text } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
+import Stars from './Stars'
 
 import styles from "./style";
 
-const BarberItem = ({ data }) => {
-  console.log(data);
+const BarberItem = ({ barber }) => {
   return (
     <View style={styles.area}>
-      <Image source={{ uri: data.avatar }} style={styles.imageIcon} />
+      <Image style={styles.imageIcon} source={{ uri: barber.avatar }} />
       <View style={styles.infoArea}>
-        <Text style={styles.userName}>{data.name}</Text>
-        <View style={styles.seeProfileButton}>
-          <Button>Ver perfil</Button>
-        </View>
+        <Text style={styles.userName}>{barber.name}</Text>
+        <Stars stars={barber.stars} showNumber={true}/>
+        <RectButton style={styles.seeProfileButton}>
+          <Text style={styles.seeProfileButtonText}>Ver perfil</Text>
+        </RectButton>
       </View>
     </View>
   );
