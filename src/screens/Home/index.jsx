@@ -29,7 +29,6 @@ function Home() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    handleLocationFinder();
     getBarbers();
   }, []);
 
