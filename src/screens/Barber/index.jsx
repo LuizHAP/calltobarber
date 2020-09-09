@@ -39,20 +39,26 @@ function Barber() {
       <ScrollView styl={styles.scroller}>
         {userInfo.photos && userInfo.photos.length > 0 ? (
           <Swiper
-            style={{ height: 240 }}
+            style={{height: 250}}
             dot={<View style={styles.swipeDot} />}
             activeDot={<View style={styles.swipeDotActive} />}
-            paginationStyle={{top: 15, right: 15, bottom: null, left: null}}
+            paginationStyle={{ top: 30, right: 15, bottom: null, left: null }}
             autoplay={true}
           >
-            {userInfo.photos.map((item, key) => {
+            {userInfo.photos.map((item, key) => (
               <View style={styles.swipeItem} key={key}>
-                <Image style={styles.swipeImage} source={{uri: item.uri}} resizeMode="cover"/>
+                <Image
+                  style={styles.swipeImage}
+                  source={{ uri: item.url }}
+                  resizeMode="cover"
+                />
               </View>
-            })}
+            ))}
           </Swiper>
         ) : (
-          <View style={styles.fakeSwiper}></View>
+          <View style={styles.fakeSwiper}>
+            <Text>FakeSwiper</Text>
+          </View>
         )}
         <View style={styles.pageBody}>
           <View style={styles.userInfoArea}></View>
