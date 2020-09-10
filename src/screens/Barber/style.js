@@ -35,6 +35,47 @@ const styles = StyleSheet.create({
     marginTop: -50,
     minHeight: 400,
   },
+  userInfoArea:{
+    flexDirection: "row",
+    marginTop: -30,
+  },
+  userAvatar:{
+    width: 110,
+    height: 110,
+    borderRadius: 20,
+    marginLeft: 30,
+    marginRight: 20,
+    borderWidth: 4,
+    borderColor: "#FFFFFF"
+  },
+  userInfo:{
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
+  userInfoName: {
+    color: "#000",
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10
+  },
+  userFavButton:{
+    width: 40,
+    height: 40,
+    backgroundColor: "#FFF",
+    borderColor: "#999999",
+    borderWidth: 1,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 20,
+    marginTop: 10,
+  },
+  backButton:{
+    position: "absolute",
+    left: 0,
+    top: 20,
+    zIndex: 9,
+  },
 });
 
 export default styles;
