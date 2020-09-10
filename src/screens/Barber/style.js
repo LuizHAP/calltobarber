@@ -76,6 +76,13 @@ const styles = StyleSheet.create({
     top: 20,
     zIndex: 9,
   },
+  fakeSwiper:{
+    height: 250,
+    backgroundColor: "#63C2D1"
+  },
+  loading: {
+    marginTop: 50,
+  }
 });
 
 export default styles;

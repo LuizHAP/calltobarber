@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, ScrollView, Image } from "react-native";
+import { Text, View, ScrollView, Image, ActivityIndicator } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { RectButton } from "react-native-gesture-handler";
 import Swiper from "react-native-swiper";
@@ -31,6 +31,7 @@ function Barber() {
       let json = await Api.getBarber(userInfo.id);
       if (json.error == "") {
         setUserInfo(json.data);
+        console.log(json.data);
       } else {
         alert("Erro: " + json.error);
       }
@@ -41,7 +42,7 @@ function Barber() {
 
   const handleBackButton = () => {
     navigation.goBack();
-  }
+  };
   return (
     <View style={styles.container}>
       <ScrollView styl={styles.scroller}>
@@ -64,9 +65,7 @@ function Barber() {
             ))}
           </Swiper>
         ) : (
-          <View style={styles.fakeSwiper}>
-            <Text>FakeSwiper</Text>
-          </View>
+          <View style={styles.fakeSwiper}></View>
         )}
         <View style={styles.pageBody}>
           <View style={styles.userInfoArea}>
@@ -82,12 +81,39 @@ function Barber() {
               <FavoriteIcon width="24" height="24" fill="#FF0000" />
             </RectButton>
           </View>
-          <View style={styles.serviceArea}></View>
+          {loading && (
+            <ActivityIndicator
+              size="large"
+              color="#000"
+              style={styles.loading}
+            />
+          )}
+          <View style={styles.serviceArea}>
+            <Text style={styles.servicesTitle}>List de Serviços</Text>
+            {userInfo.service.map((item, key) => {
+              <View style={styles.serviceItem} key={key}>
+                <View style={styles.serviceInfo}>
+                  <Text style={styles.serviceName}>{item.name}</Text>
+                  <Text style={styles.servicePrice}>R$ {item.price}</Text>
+                </View>
+                <RectButton
+                  style={styles.serviceChooseButton}
+                >
+                  <Text style={serviceChooseButtonText}>Agendar</Text>
+                </RectButton>
+              </View>;
+            })}
+          </View>
           <View style={styles.testimonialArea}></View>
         </View>
       </ScrollView>
       <RectButton style={styles.backButton} onPress={handleBackButton}>
-        <BackIcon width={44} height={44} fill="#FFF"/>
+        <BackIcon
+          width={44}
+          height={44}
+          fill="#FFF"
+          style={styles.backButton}
+        />
       </RectButton>
     </View>
   );
