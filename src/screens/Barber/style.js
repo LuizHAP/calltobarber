@@ -25,40 +25,40 @@ const styles = StyleSheet.create({
   swipeItem: {
     flex: 1,
   },
-  swipeImage:{
+  swipeImage: {
     width: "100%",
     height: 240,
   },
-  pageBody:{
-    backgroundColor: '#FFF',
+  pageBody: {
+    backgroundColor: "#FFF",
     borderTopLeftRadius: 50,
     marginTop: -50,
     minHeight: 400,
   },
-  userInfoArea:{
+  userInfoArea: {
     flexDirection: "row",
     marginTop: -30,
   },
-  userAvatar:{
+  userAvatar: {
     width: 110,
     height: 110,
     borderRadius: 20,
     marginLeft: 30,
     marginRight: 20,
     borderWidth: 4,
-    borderColor: "#FFFFFF"
+    borderColor: "#FFFFFF",
   },
-  userInfo:{
+  userInfo: {
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: "flex-end",
   },
   userInfoName: {
     color: "#000",
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 10
+    marginBottom: 10,
   },
-  userFavButton:{
+  userFavButton: {
     width: 40,
     height: 40,
     backgroundColor: "#FFF",
@@ -70,57 +70,85 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginTop: 10,
   },
-  backButton:{
+  backButton: {
     position: "absolute",
     left: 0,
     top: 20,
     zIndex: 9,
   },
-  fakeSwiper:{
+  fakeSwiper: {
     height: 250,
-    backgroundColor: "#63C2D1"
+    backgroundColor: "#63C2D1",
   },
   loading: {
     marginTop: 50,
   },
-  serviceArea:{
-    marginTop: 20,
+  serviceArea: {
+    marginTop: 30,
   },
-  servicesTitle:{
+  servicesTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: "#268596",
-    marginLeft: 20,
+    marginLeft: 30,
     marginBottom: 20,
   },
   serviceItem: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginLeft: 30,
     marginRight: 30,
-    marginBottom: 20
+    marginBottom: 20,
   },
   serviceInfo: {
-    flex: 1
+    flex: 1,
   },
   serviceName: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: "#268596"
+    fontWeight: "bold",
+    color: "#268596",
   },
   servicePrice: {
     fontSize: 14,
-    color: "#268596"
+    color: "#268596",
   },
   serviceChooseButton: {
-    backgroundColor: '#4EADBE',
+    backgroundColor: "#4EADBE",
     borderRadius: 10,
-    padding: '10 15',
+    paddingHorizontal: 10,
+    paddingVertical: 15,
   },
   serviceChooseButtonText: {
     fontSize: 14,
-    fontWeight: 'bold',
-    color: "#FFF"
-  }
+    fontWeight: "bold",
+    color: "#FFF",
+  },
+  testimonialsArea: {
+    marginTop: 20,
+    marginBottom: 50,
+  },
+  testimonialsItem: {
+    backgroundColor: "#268596",
+    padding: 15,
+    borderRadius: 10,
+    height: 110,
+    justifyContent: "center",
+    marginLeft: 50,
+    marginRight: 50,
+  },
+  testimonialsInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
+  testimonialsName: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#FFF",
+  },
+  testimonialsBody: {
+    fontSize: 13,
+    color: "#FFF",
+  },
 });
 
 export default styles;

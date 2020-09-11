@@ -5,8 +5,11 @@ import { RectButton } from "react-native-gesture-handler";
 import Swiper from "react-native-swiper";
 import Stars from "../../components/Stars";
 
+import FavoriteFullIcon from "../../assets/favorite_full.svg";
 import FavoriteIcon from "../../assets/favorite.svg";
 import BackIcon from "../../assets/back.svg";
+import NavPrevIcon from "../../assets/nav_prev.svg";
+import NavNextIcon from "../../assets/nav_next.svg";
 
 import styles from "./style";
 
@@ -23,6 +26,8 @@ function Barber() {
     stars: route.params.stars,
   });
 
+  const [favorited, setFavorited] = useState(false);
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -31,6 +36,7 @@ function Barber() {
       let json = await Api.getBarber(userInfo.id);
       if (json.error == "") {
         setUserInfo(json.data);
+        setFavorited(json.data.favorited);
       } else {
         alert("Erro: " + json.error);
       }
@@ -42,6 +48,12 @@ function Barber() {
   const handleBackButton = () => {
     navigation.goBack();
   };
+
+  const handleFavClick = () => {
+    setFavorited(!favorited);
+    Api.setFavorite(userInfo.id);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView styl={styles.scroller}>
@@ -76,8 +88,12 @@ function Barber() {
               <Text style={styles.userInfoName}>{userInfo.name}</Text>
               <Stars stars={userInfo.stars} showNumber={true} />
             </View>
-            <RectButton style={styles.userFavButton}>
-              <FavoriteIcon width="24" height="24" fill="#FF0000" />
+            <RectButton style={styles.userFavButton} onPress={handleFavClick}>
+              {favorited ? (
+                <FavoriteFullIcon width="24" height="24" fill="#FF0000" />
+              ) : (
+                <FavoriteIcon width="24" height="24" fill="#FF0000" />
+              )}
             </RectButton>
           </View>
           {loading && (
@@ -103,7 +119,27 @@ function Barber() {
               ))}
             </View>
           )}
-          <View style={styles.testimonialArea}></View>
+          {userInfo.testimonials && userInfo.testimonials.length > 0 ? (
+            <View style={styles.testimonialArea}>
+              <Swiper
+                style={{ height: 110 }}
+                showsPagination={false}
+                showsButtons={true}
+                prevButton={<NavPrevIcon width="35" height="35" fill="#000" />}
+                nextButton={<NavNextIcon width="35" height="35" fill="#000" />}
+              >
+                {userInfo.testimonials.map((item, key) => (
+                  <View style={styles.testimonialsItem} key={key}>
+                    <View style={styles.testimonialsInfo}>
+                      <Text style={styles.testimonialsName}>{item.name}</Text>
+                      <Stars stars={item.rate} showNumber={false} />
+                    </View>
+                    <Text style={styles.testimonialsBody}>{item.body}</Text>
+                  </View>
+                ))}
+              </Swiper>
+            </View>
+          ) : null}
         </View>
       </ScrollView>
       <RectButton style={styles.backButton} onPress={handleBackButton}>
