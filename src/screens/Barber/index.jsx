@@ -31,7 +31,6 @@ function Barber() {
       let json = await Api.getBarber(userInfo.id);
       if (json.error == "") {
         setUserInfo(json.data);
-        console.log(json.data);
       } else {
         alert("Erro: " + json.error);
       }
@@ -65,7 +64,7 @@ function Barber() {
             ))}
           </Swiper>
         ) : (
-          <View style={styles.fakeSwiper}></View>
+          <View style={styles.fakeSwiper} />
         )}
         <View style={styles.pageBody}>
           <View style={styles.userInfoArea}>
@@ -88,22 +87,22 @@ function Barber() {
               style={styles.loading}
             />
           )}
-          <View style={styles.serviceArea}>
-            <Text style={styles.servicesTitle}>List de Serviços</Text>
-            {userInfo.service.map((item, key) => {
-              <View style={styles.serviceItem} key={key}>
-                <View style={styles.serviceInfo}>
-                  <Text style={styles.serviceName}>{item.name}</Text>
-                  <Text style={styles.servicePrice}>R$ {item.price}</Text>
+          {userInfo.services && (
+            <View style={styles.serviceArea}>
+              <Text style={styles.servicesTitle}>Lista de Serviços</Text>
+              {userInfo.services.map((item, key) => (
+                <View style={styles.serviceItem} key={key}>
+                  <View style={styles.serviceInfo}>
+                    <Text style={styles.serviceName}>{item.name}</Text>
+                    <Text style={styles.servicePrice}>R$ {item.price}</Text>
+                  </View>
+                  <RectButton style={styles.serviceChooseButton}>
+                    <Text style={styles.serviceChooseButtonText}>Agendar</Text>
+                  </RectButton>
                 </View>
-                <RectButton
-                  style={styles.serviceChooseButton}
-                >
-                  <Text style={serviceChooseButtonText}>Agendar</Text>
-                </RectButton>
-              </View>;
-            })}
-          </View>
+              ))}
+            </View>
+          )}
           <View style={styles.testimonialArea}></View>
         </View>
       </ScrollView>

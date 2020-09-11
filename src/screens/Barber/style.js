@@ -82,6 +82,44 @@ const styles = StyleSheet.create({
   },
   loading: {
     marginTop: 50,
+  },
+  serviceArea:{
+    marginTop: 20,
+  },
+  servicesTitle:{
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: "#268596",
+    marginLeft: 20,
+    marginBottom: 20,
+  },
+  serviceItem: {
+    flexDirection: 'row',
+    marginLeft: 30,
+    marginRight: 30,
+    marginBottom: 20
+  },
+  serviceInfo: {
+    flex: 1
+  },
+  serviceName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: "#268596"
+  },
+  servicePrice: {
+    fontSize: 14,
+    color: "#268596"
+  },
+  serviceChooseButton: {
+    backgroundColor: '#4EADBE',
+    borderRadius: 10,
+    padding: '10 15',
+  },
+  serviceChooseButtonText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: "#FFF"
   }
 });
 
