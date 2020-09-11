@@ -91,6 +91,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  serviceInfoModal: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  serviceNameModal: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  servicePriceModal: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
 
 export default styles;

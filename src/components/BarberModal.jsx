@@ -30,6 +30,18 @@ const BarberModal = ({ show, setShow, user, service }) => {
               <Text style={styles.userNameModal}>{user.name}</Text>
             </View>
           </View>
+          {service != null && (
+            <View style={styles.modalItem}>
+              <View style={styles.serviceInfoModal}>
+                <Text style={styles.serviceNameModal}>
+                  {user.service[service].name}
+                </Text>
+                <Text style={styles.servicePriceModal}>
+                  {user.service[service].price}
+                </Text>
+              </View>
+            </View>
+          )}
         </View>
       </View>
     </Modal>
