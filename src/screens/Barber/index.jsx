@@ -3,7 +3,9 @@ import { Text, View, ScrollView, Image, ActivityIndicator } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { RectButton } from "react-native-gesture-handler";
 import Swiper from "react-native-swiper";
+
 import Stars from "../../components/Stars";
+import BarberModal from '../../components/BarberModal'
 
 import FavoriteFullIcon from "../../assets/favorite_full.svg";
 import FavoriteIcon from "../../assets/favorite.svg";
@@ -27,8 +29,9 @@ function Barber() {
   });
 
   const [favorited, setFavorited] = useState(false);
-
   const [loading, setLoading] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const getBarberInfo = async () => {
@@ -48,6 +51,11 @@ function Barber() {
   const handleBackButton = () => {
     navigation.goBack();
   };
+
+  const handleServiceChoose = (key) => {
+    setSelectedService(key);
+    setShowModal(true);
+  }
 
   const handleFavClick = () => {
     setFavorited(!favorited);
@@ -112,7 +120,7 @@ function Barber() {
                     <Text style={styles.serviceName}>{item.name}</Text>
                     <Text style={styles.servicePrice}>R$ {item.price}</Text>
                   </View>
-                  <RectButton style={styles.serviceChooseButton}>
+                  <RectButton style={styles.serviceChooseButton} onPress={()=>handleServiceChoose(key)}>
                     <Text style={styles.serviceChooseButtonText}>Agendar</Text>
                   </RectButton>
                 </View>
@@ -150,6 +158,8 @@ function Barber() {
           style={styles.backButton}
         />
       </RectButton>
+
+      <BarberModal show={showModal} setShow={setShowModal} user={userInfo} service={selectedService}/>
     </View>
   );
 }

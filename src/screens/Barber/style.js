@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   backButton: {
     position: "absolute",
     left: 0,
-    top: 20,
+    top: 50,
     zIndex: 9,
   },
   fakeSwiper: {
@@ -136,8 +136,8 @@ const styles = StyleSheet.create({
     marginRight: 50,
   },
   testimonialsInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 5,
   },
   testimonialsName: {
