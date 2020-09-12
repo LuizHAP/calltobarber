@@ -64,7 +64,7 @@ function Barber() {
 
   return (
     <View style={styles.container}>
-      <ScrollView styl={styles.scroller}>
+      <ScrollView style={styles.scroller}>
         {userInfo.photos && userInfo.photos.length > 0 ? (
           <Swiper
             style={{ height: 250 }}
@@ -118,7 +118,7 @@ function Barber() {
                 <View style={styles.serviceItem} key={key}>
                   <View style={styles.serviceInfo}>
                     <Text style={styles.serviceName}>{item.name}</Text>
-                    <Text style={styles.servicePrice}>R$ {item.price}</Text>
+                    <Text style={styles.servicePrice}>R$ {item.price.toFixed(2)}</Text>
                   </View>
                   <RectButton style={styles.serviceChooseButton} onPress={()=>handleServiceChoose(key)}>
                     <Text style={styles.serviceChooseButtonText}>Agendar</Text>

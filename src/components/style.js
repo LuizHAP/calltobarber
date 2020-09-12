@@ -103,6 +103,53 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  finishButton: {
+    backgroundColor: "#268596",
+    height: 68,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 18,
+  },
+  finishButtonText: {
+    color: "#FFF",
+    fontSize: 17,
+    fontWeight: "bold",
+  },
+  dateInfo: {
+    flexDirection: "row",
+  },
+  dateTitleArea: {
+    width: 140,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  dateTitle: {
+    fontSize: 17,
+    fontWeight: "bold",
+  },
+  dateNextArea: {
+    flex: 1,
+    alignItems: "flex-start",
+  },
+  datePrevArea: {
+    flex: 1,
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+  },
+  dateItem: {
+    width: 45,
+    justifyContent: "center",
+    borderRadius: 10,
+    paddingVertical: 5,
+  },
+  dateItemWeekDay: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  dateItemNumber: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
 });
 
 export default styles;

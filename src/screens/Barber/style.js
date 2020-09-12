@@ -149,6 +149,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#FFF",
   },
+  scrollerDateList:{
+    
+  }
 });
 
 export default styles;
