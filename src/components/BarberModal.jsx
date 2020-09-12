@@ -48,7 +48,7 @@ const BarberModal = ({ show, setShow, user, service }) => {
       let daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate(); //quantos dias tem um mês tem
       let newListDays = [];
 
-      for (let i = 1; i < daysInMonth; i++) {
+      for (let i = 1; i <= daysInMonth; i++) {
         let d = new Date(selectedYear, selectedMonth, i);
 
         let year = d.getFullYear();
@@ -150,9 +150,11 @@ const BarberModal = ({ show, setShow, user, service }) => {
             >
               {listDays.map((item, key) => (
                 <RectButton
-                  style={styles.dateItem}
+                  style={item.status ? styles.dateItem : styles.dateItemOpacity}
                   key={key}
-                  onPress={() => {}}
+                  onPress={() => {
+                    item.status ? selectedDay(item.number) : null;
+                  }}
                 >
                   <Text style={styles.dateItemWeekDay}>{item.weekday}</Text>
                   <Text style={styles.dateItemNumber}>{item.number}</Text>

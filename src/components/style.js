@@ -139,6 +139,15 @@ const styles = StyleSheet.create({
   dateItem: {
     width: 45,
     justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    paddingVertical: 5,
+  },
+  dateItemOpacity: {
+    width: 45,
+    justifyContent: "center",
+    alignItems: "center",
+    opacity: 0.5,
     borderRadius: 10,
     paddingVertical: 5,
   },
