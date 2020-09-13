@@ -136,29 +136,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "flex-end",
   },
-  dateItem: {
-    width: 45,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    paddingVertical: 5,
-  },
-  dateItemOpacity: {
-    width: 45,
-    justifyContent: "center",
-    alignItems: "center",
-    opacity: 0.5,
-    borderRadius: 10,
-    paddingVertical: 5,
-  },
-  dateItemWeekDay: {
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  dateItemNumber: {
-    fontWeight: "bold",
-    fontSize: 16,
-  },
 });
 
 export default styles;

@@ -9,6 +9,8 @@ import ExpandIcon from "../assets/expand.svg";
 import NavPrevIcon from "../assets/nav_prev.svg";
 import NavNextIcon from "../assets/nav_next.svg";
 
+import Api from "../Api";
+
 const months = [
   "Janeiro",
   "Fevereiro",
@@ -67,18 +69,37 @@ const BarberModal = ({ show, setShow, user, service }) => {
         });
       }
       setListDays(newListDays);
-      setSelectedDay(1);
+      setSelectedDay(0);
       setListHours([]);
       setSelectedHour(0);
     }
   }, [user, selectedMonth, selectedYear]);
+
+  useEffect(() => {
+    if (user.available && selectedDay > 0) {
+      let d = new Date(selectedYear, selectedMonth, selectedDay);
+      let year = d.getFullYear();
+      let month = d.getMonth() + 1;
+      let day = d.getDate();
+      month = month < 10 ? "0" + month : month;
+      day = day < 10 ? "0" + day : day;
+      let selDate = `${year}-${month}-${day}`;
+
+      let availability = user.available.filter((e) => e.date === selDate);
+
+      if (availability.length > 0) {
+        setListHours(availability[0].hours);
+      }
+    }
+    setSelectedHour(null);
+  }, [user, selectedDay]);
 
   const handleLeftDateClick = () => {
     let mountDate = new Date(selectedYear, selectedMonth, 1);
     mountDate.setMonth(mountDate.getMonth() - 1);
     setSelectedYear(mountDate.getFullYear());
     setSelectedMonth(mountDate.getMonth());
-    setSelectedDay(1);
+    setSelectedDay(0);
   };
 
   const handleRightDateClick = () => {
@@ -86,14 +107,40 @@ const BarberModal = ({ show, setShow, user, service }) => {
     mountDate.setMonth(mountDate.getMonth() + 1);
     setSelectedYear(mountDate.getFullYear());
     setSelectedMonth(mountDate.getMonth());
-    setSelectedDay(1);
+    setSelectedDay(0);
   };
 
   const handleCloseButton = () => {
     setShow(false);
   };
 
-  const handleFinishClick = () => {};
+  const handleFinishClick = async () => {
+    if (
+      user.id &&
+      service != null &&
+      selectedYear > 0 &&
+      selectedMonth > 0 &&
+      selectedDay > 0 &&
+      selectedHour != null
+    ) {
+      let res = await Api.setAppointment(
+        user.id,
+        service,
+        selectedDay,
+        selectedHour,
+        selectedMonth,
+        selectedYear
+      );
+      if (res.error == "") {
+        setShow(false);
+        navigation.navigate('Appointments');
+      } else {
+        alert(res.error);
+      }
+    } else {
+      alert("Preencha todos os dados");
+    }
+  };
 
   return (
     <Modal transparent={true} visible={show} animationType="slide">
@@ -150,18 +197,80 @@ const BarberModal = ({ show, setShow, user, service }) => {
             >
               {listDays.map((item, key) => (
                 <RectButton
-                  style={item.status ? styles.dateItem : styles.dateItemOpacity}
+                  style={{
+                    width: 45,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 10,
+                    paddingVertical: 5,
+                    opacity: item.status ? 1 : 0.5,
+                    backgroundColor:
+                      item.number === selectedDay ? "#4EADBE" : "#FFF",
+                  }}
                   key={key}
                   onPress={() => {
-                    item.status ? selectedDay(item.number) : null;
+                    item.status ? setSelectedDay(item.number) : null;
                   }}
                 >
-                  <Text style={styles.dateItemWeekDay}>{item.weekday}</Text>
-                  <Text style={styles.dateItemNumber}>{item.number}</Text>
+                  <Text
+                    style={{
+                      color: item.number === selectedDay ? "#FFF" : "#000",
+                      fontWeight: "bold",
+                      fontSize: 16,
+                    }}
+                  >
+                    {item.weekday}
+                  </Text>
+                  <Text
+                    style={{
+                      color: item.number === selectedDay ? "#FFF" : "#000",
+                      fontWeight: "bold",
+                      fontSize: 16,
+                    }}
+                  >
+                    {item.number}
+                  </Text>
                 </RectButton>
               ))}
             </ScrollView>
           </View>
+          {selectedDay > 0 && listHours.length > 0 && (
+            <View style={styles.modalItem}>
+              <ScrollView
+                style={styles.scrollerTimeList}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+              >
+                {listHours.map((item, key) => (
+                  <RectButton
+                    style={{
+                      width: 75,
+                      height: 40,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 10,
+                      backgroundColor:
+                        item === selectedHour ? "#4EADBE" : "#FFF",
+                    }}
+                    key={key}
+                    onPress={() => {
+                      setSelectedHour(item);
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: item === selectedHour ? "#FFF" : "#000",
+                        fontWeight: item === selectedHour ? "bold" : "normal",
+                      }}
+                    >
+                      {item}
+                    </Text>
+                  </RectButton>
+                ))}
+              </ScrollView>
+            </View>
+          )}
 
           <RectButton style={styles.finishButton} onPress={handleFinishClick}>
             <Text style={styles.finishButtonText}>Finalizar agendamento</Text>
