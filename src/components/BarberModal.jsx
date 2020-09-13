@@ -123,20 +123,23 @@ const BarberModal = ({ show, setShow, user, service }) => {
       selectedDay > 0 &&
       selectedHour != null
     ) {
-      let res = await Api.setAppointment(
-        user.id,
-        service,
-        selectedDay,
-        selectedHour,
-        selectedMonth,
-        selectedYear
-      );
-      if (res.error == "") {
-        setShow(false);
-        navigation.navigate('Appointments');
-      } else {
-        alert(res.error);
-      }
+      // let res = await Api.setAppointment(
+      //   user.id,
+      //   service,
+      //   selectedDay,
+      //   selectedHour,
+      //   selectedMonth,
+      //   selectedYear
+      // );
+      // if (res.error == "") {
+      //   setShow(false);
+      //   navigation.navigate('Appointments');
+      // } else {
+      //   alert(res.error);
+      // }
+
+      setShow(false);
+      navigation.navigate("Appointments");
     } else {
       alert("Preencha todos os dados");
     }
